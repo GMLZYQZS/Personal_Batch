@@ -1,0 +1,23 @@
+rem version:v2.0
+rem author:GMLZ
+rem date:2025-12-3
+rem Function:连接特定的wifi
+
+chcp 65001 >nul
+echo off
+
+::设置wifi的名称和密码
+set "WIFI_SSID=xxx"
+set "WIFI_PASSWORD=xxx"
+
+::断开当前wifi连接
+netsh wlan disconnect
+
+::连接选定的wifi
+netsh wlan connect name="%WIFI_SSID%"
+
+:: 检查连接状态
+timeout /t 1 /nobreak >nul
+netsh wlan show interfaces | findstr /C:"SSID" /C:"状态"
+
+exit /b

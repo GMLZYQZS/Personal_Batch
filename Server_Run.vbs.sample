@@ -1,0 +1,24 @@
+' version:v1.2
+' author:GMLZ
+' date:2026-01-05
+' Function:打开基于本地运行的服务器和网页
+
+'Set Windows Shell object（创建 Windows Shell 对象）
+Set objShell = CreateObject("WScript.Shell")
+
+' 可模块化位置
+' If the directory or the running program needs to be changed later, make the changes here
+' 后续若需要更改目录与运行程序，则在此更改
+' Usage: ServiceDir = "The directory of the current .exe file"; RunExe = "The .exe file to be run"
+' 用法：ServiceDir="当前可执行文件的目录"；RunExe="需要运行的可执行文件"
+ServiceDir = "C:\..."
+RunExe = "xxx.exe"
+
+' Run and hide the cmd window（运行并隐藏cmd框）
+objShell.Run "cmd /c cd /d """ & ServiceDir & """ && " & RunExe, 0, False
+
+'  Wait 300ms（等待300ms，等服务器启动完全）
+WScript.Sleep 300
+
+' Open the browser and run Web_UI（打开浏览器运行网页界面）
+objShell.Run "http://xxx"
